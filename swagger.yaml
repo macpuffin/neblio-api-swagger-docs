@@ -302,6 +302,8 @@ definitions:
         
   broadcastTxRequest:
     type: object
+    required:
+      - txHex
     properties:
       txHex:
         type: string
@@ -510,6 +512,12 @@ definitions:
         
   issueTokenRequest:
     type: object
+    required:
+      - issueAddress
+      - amount
+      - divisibility
+      - fee
+      - reissuable
     properties:
       issueAddress:
         type: string
@@ -649,7 +657,13 @@ definitions:
         
   sendTokenRequest:
     type: object
+    required:
+      - fee
+      - to
     properties:
+      fee:
+        type: number
+        description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
       from:
         type: array
         description: Array of addresses to send the token from
@@ -799,7 +813,13 @@ definitions:
           
   burnTokenRequest:
     type: object
+    required:
+      - fee
+      - burn
     properties:
+      fee:
+        type: number
+        description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
       from:
         type: array
         description: Array of addresses to send the token from
