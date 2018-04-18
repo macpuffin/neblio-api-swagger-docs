@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Neblio REST API Suite",
+        "title": "Neblio REST API Suite (Testnet)",
         "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
         "version": "1.0.0"
     },
