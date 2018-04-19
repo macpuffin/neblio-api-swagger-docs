@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Neblio REST API Suite (Testnet)",
+    "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.1.0"
+    "version": "1.1.1"
   },
-  "host": "ntp1node.nebl.io:1443",
+  "host": "ntp1node.nebl.io",
   "schemes": [
     "https"
   ],
@@ -169,7 +169,7 @@
     "/ntp1/tokenmetadata/{tokenid}": {
       "get": {
         "summary": "Get Issuance Metadata of Token",
-        "description": "Returns the metadata associated with a token at time of issuance. \n",
+        "description": "Returns the metadata associated with a token at time of issuance.\n",
         "operationId": "getTokenMetadataOfIssuance",
         "consumes": [
           "application/json"
@@ -413,11 +413,410 @@
         }
       }
     },
-    "/faucet/withdrawal": {
+    "/testnet/ntp1/tokenid/{tokensymbol}": {
+      "get": {
+        "summary": "Returns the tokenId representing a token",
+        "description": "Translates a token symbol to a tokenId if a token exists with that symbol on the network\n",
+        "operationId": "testnet_getTokenId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokensymbol",
+            "in": "path",
+            "description": "Token symbol",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.",
+            "schema": {
+              "$ref": "#/definitions/getTokenIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/broadcast": {
+      "post": {
+        "summary": "Broadcasts a signed raw transaction to the network",
+        "description": "Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.\n",
+        "operationId": "testnet_broadcastTx",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Object representing a transaction to broadcast",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/broadcastTxRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the TXID if the broadcast was successful",
+            "schema": {
+              "$ref": "#/definitions/broadcastTxResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/addressinfo/{address}": {
+      "get": {
+        "summary": "Information On a Neblio Address",
+        "description": "Returns both NEBL and NTP1 token UTXOs held at the given address.\n",
+        "operationId": "testnet_getAddressInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Neblio Address to get information on.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object with an array of UTXOs for this address",
+            "schema": {
+              "$ref": "#/definitions/getAddressInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/transactioninfo/{txid}": {
+      "get": {
+        "summary": "Information On an NTP1 Transaction",
+        "description": "Returns detailed information regarding an NTP1 transaction.\n",
+        "operationId": "testnet_getTransactionInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "txid",
+            "in": "path",
+            "description": "Neblio txid to get information on.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object represending this transaction",
+            "schema": {
+              "$ref": "#/definitions/getTransactionInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/tokenmetadata/{tokenid}": {
+      "get": {
+        "summary": "Get Issuance Metadata of Token",
+        "description": "Returns the metadata associated with a token at time of issuance.\n",
+        "operationId": "testnet_getTokenMetadataOfIssuance",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenid",
+            "in": "path",
+            "description": "TokenId to request metadata for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the metadata of a token at issuance",
+            "schema": {
+              "$ref": "#/definitions/getTokenMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/tokenmetadata/{tokenid}/{utxo}": {
+      "get": {
+        "summary": "Get UTXO Metadata of Token",
+        "description": "Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.\n",
+        "operationId": "testnet_getTokenMetadataOfUtxo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenid",
+            "in": "path",
+            "description": "TokenId to request metadata for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "utxo",
+            "in": "path",
+            "description": "Specific UTXO to request metadata for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the metadata of a token for a UTXO",
+            "schema": {
+              "$ref": "#/definitions/getTokenMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/stakeholders/{tokenid}": {
+      "get": {
+        "summary": "Get Addresses Holding a Token",
+        "description": "Returns the the the addresses holding a token and how many tokens are held\n",
+        "operationId": "testnet_getTokenHolders",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenid",
+            "in": "path",
+            "description": "TokenId to request metadata for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing all of the addresses holding a token",
+            "schema": {
+              "$ref": "#/definitions/getTokenHoldersResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/issue": {
+      "post": {
+        "summary": "Builds a transaction that issues a new NTP1 Token",
+        "description": "Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.\n",
+        "operationId": "testnet_issueToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Object representing the token to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/issueTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object representing the token created",
+            "schema": {
+              "$ref": "#/definitions/issueTokenResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/sendtoken": {
+      "post": {
+        "summary": "Builds a transaction that sends an NTP1 Token",
+        "description": "Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.\n",
+        "operationId": "testnet_sendToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Object representing the token to be sent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sendTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object representing the tx to send the token",
+            "schema": {
+              "$ref": "#/definitions/sendTokenResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/ntp1/burntoken": {
+      "post": {
+        "summary": "Builds a transaction that burns an NTP1 Token",
+        "description": "Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.\n",
+        "operationId": "testnet_burnToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Object representing the token to be burned",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/burnTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Testnet-NTP1"
+        ],
+        "responses": {
+          "200": {
+            "description": "An object representing the tx to burn the token",
+            "schema": {
+              "$ref": "#/definitions/burnTokenResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/testnet/faucet": {
       "get": {
         "summary": "Withdraws testnet NEBL to the specified address",
         "description": "Withdraw testnet NEBL to your Neblio Testnet address. By default amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals allowed per 24 hour period.\n",
-        "operationId": "getFaucetWithdrawal",
+        "operationId": "testnet_getFaucet",
         "consumes": [
           "application/json"
         ],
@@ -441,13 +840,13 @@
           }
         ],
         "tags": [
-          "Faucet"
+          "Testnet-Faucet"
         ],
         "responses": {
           "200": {
             "description": "Object containing the transaction ID of the withdrawal.",
             "schema": {
-              "$ref": "#/definitions/getFaucetWithdrawalResponse"
+              "$ref": "#/definitions/getFaucetResponse"
             }
           }
         }
@@ -1463,7 +1862,7 @@
         }
       }
     },
-    "getFaucetWithdrawalResponse": {
+    "getFaucetResponse": {
       "type": "object",
       "properties": {
         "status": {
