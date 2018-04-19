@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Neblio REST API Suite (Testnet)
   description: APIs for Interacting with NTP1 Tokens & The Neblio Blockchain
-  version: 1.0.0
+  version: 1.1.0
 host: 'ntp1node.nebl.io:1443'
 schemes:
   - https
@@ -10,16 +10,17 @@ basePath: /
 produces:
   - application/json
 paths:
-  /ntp1/tokenid/{tokensymbol}:
+  '/ntp1/tokenid/{tokensymbol}':
     get:
       summary: Returns the tokenId representing a token
-      description: |
-        Translates a token symbol to a tokenId if a token exists with that symbol on the network
+      description: >
+        Translates a token symbol to a tokenId if a token exists with that
+        symbol on the network
       operationId: getTokenId
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - name: tokensymbol
           in: path
@@ -30,22 +31,22 @@ paths:
         - NTP1
       responses:
         '200':
-          description: Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.
+          description: >-
+            Object containing the token symbol and ID, if token symbol does not
+            exist on network, empty object is returned.
           schema:
             $ref: '#/definitions/getTokenIdResponse'
-
-
-
   /ntp1/broadcast:
     post:
       summary: Broadcasts a signed raw transaction to the network
-      description: |
-        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+      description: >
+        Broadcasts a signed raw transaction to the network. If successful
+        returns the txid of the broadcast trasnaction.
       operationId: broadcastTx
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - in: body
           name: body
@@ -64,19 +65,16 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-  /ntp1/addressinfo/{address}:
+  '/ntp1/addressinfo/{address}':
     get:
       summary: Information On a Neblio Address
       description: |
         Returns both NEBL and NTP1 token UTXOs held at the given address.
       operationId: getAddressInfo
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - name: address
           in: path
@@ -94,19 +92,43 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-  /ntp1/tokenmetadata/{tokenid}:
+  '/ntp1/transactioninfo/{txid}':
+    get:
+      summary: Information On an NTP1 Transaction
+      description: |
+        Returns detailed information regarding an NTP1 transaction.
+      operationId: getTransactionInfo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: txid
+          in: path
+          description: Neblio txid to get information on.
+          required: true
+          type: string
+      tags:
+        - NTP1
+      responses:
+        '200':
+          description: An object represending this transaction
+          schema:
+            $ref: '#/definitions/getTransactionInfoResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/ntp1/tokenmetadata/{tokenid}':
     get:
       summary: Get Issuance Metadata of Token
       description: |
-        Returns the metadata associated with a token at time of issuance.
+        Returns the metadata associated with a token at time of issuance. 
       operationId: getTokenMetadataOfIssuance
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - name: tokenid
           in: path
@@ -124,19 +146,17 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-  /ntp1/tokenmetadata/{tokenid}/{utxo}:
+  '/ntp1/tokenmetadata/{tokenid}/{utxo}':
     get:
       summary: Get UTXO Metadata of Token
-      description: |
-        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
+      description: >
+        Returns the metadata associated with a token for that specific utxo
+        instead of the issuance transaction.
       operationId: getTokenMetadataOfUtxo
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - name: tokenid
           in: path
@@ -159,19 +179,17 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-  /ntp1/stakeholders/{tokenid}:
+  '/ntp1/stakeholders/{tokenid}':
     get:
       summary: Get Addresses Holding a Token
-      description: |
-        Returns the the the addresses holding a token and how many tokens are held
+      description: >
+        Returns the the the addresses holding a token and how many tokens are
+        held
       operationId: getTokenHolders
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - name: tokenid
           in: path
@@ -189,19 +207,17 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
   /ntp1/issue:
     post:
       summary: Builds a transaction that issues a new NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that issues a new NTP1 token on the
+        Neblio blockchain.
       operationId: issueToken
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - in: body
           name: body
@@ -220,19 +236,17 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
   /ntp1/sendtoken:
     post:
       summary: Builds a transaction that sends an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that sends an NTP1 token on the
+        Neblio blockchain.
       operationId: sendToken
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - in: body
           name: body
@@ -251,19 +265,17 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
   /ntp1/burntoken:
     post:
       summary: Builds a transaction that burns an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that burns an NTP1 token on the
+        Neblio blockchain.
       operationId: burnToken
       consumes:
-        - "application/json"
+        - application/json
       produces:
-        - "application/json"
+        - application/json
       parameters:
         - in: body
           name: body
@@ -282,11 +294,37 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-
-
+  /faucet/withdrawal:
+    get:
+      summary: Withdraws testnet NEBL to the specified address
+      description: >
+        Withdraw testnet NEBL to your Neblio Testnet address. By default
+        amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only
+        2 withdrawals allowed per 24 hour period.
+      operationId: getFaucetWithdrawal
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: address
+          in: query
+          description: Your Neblio Testnet Address
+          required: true
+          type: string
+        - name: amount
+          in: query
+          description: Amount of NEBL to withdrawal in satoshis
+          required: false
+          type: number
+      tags:
+        - Faucet
+      responses:
+        '200':
+          description: >-
+            Object containing the transaction ID of the withdrawal.
+          schema:
+            $ref: '#/definitions/getFaucetWithdrawalResponse'
 definitions:
   getTokenIdResponse:
     type: object
@@ -297,9 +335,6 @@ definitions:
       tokenName:
         type: string
         description: String representing the token Symbol
-
-
-
   broadcastTxRequest:
     type: object
     required:
@@ -308,18 +343,12 @@ definitions:
       txHex:
         type: string
         description: Signed raw tx hex to broadcast
-
-
-
   broadcastTxResponse:
     type: object
     properties:
       txid:
         type: string
         description: Txid of successfully broadcasted transaction
-
-
-
   getAddressInfoResponse:
     type: object
     properties:
@@ -373,13 +402,172 @@ definitions:
                     description: Decimal places the token is divisible to
                   lockStatus:
                     type: boolean
-                    description: 'Whether the token is locked, preventing more from being issued'
+                    description: >-
+                      Whether the token is locked, preventing more from being
+                      issued
                   aggregationPolicy:
                     type: string
                     description: Whether the tokens can be aggregated together
-
-
-
+  getTransactionInfoResponse:
+    type: object
+    properties:
+      hex:
+        type: string
+        description: Transaction in raw hex
+      txid:
+        type: string
+        description: TXID of transaction
+      version:
+        type: number
+        description: Transaction version
+      locktime:
+        type: number
+        description: Transaction locktime
+      vin:
+        type: array
+        description: Array of transaction inputs
+        items:
+          type: object
+          properties:
+            txid:
+              type: string
+              description: TXID of the input
+            vout:
+              type: number
+              description: output index
+            scriptSig:
+              type: object
+              properties:
+                asm:
+                  type: string
+                hex:
+                  type: string
+            sequence:
+              type: number
+            previousOutput:
+              type: object
+              properties:
+                asm:
+                  type: string
+                hex:
+                  type: string
+                reqSigs:
+                  type: number
+                type:
+                  type: string
+                addresses:
+                  type: array
+                  items:
+                    type: string
+            tokens:
+              type: array
+              items:
+                type: object
+                properties:
+                  tokenId:
+                    type: string
+                    description: ID of the token
+                  amount:
+                    type: number
+                    description: Number of tokens
+                  issueTxid:
+                    type: string
+                    description: TXID the token was issued in
+                  divisibility:
+                    type: number
+                    description: Decimal places the token is divisible to
+                  lockStatus:
+                    type: boolean
+                    description: Whether issuance of more tokens is locked
+                  aggregationPolicy:
+                    type: string
+                    description: Whether the tokens are aggregatable
+            value:
+              type: number
+              description: Value of input in NEBL satoshi
+      vout:
+        type: array
+        description: Array of transaction outputs
+        items:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Value of the output in NEBL satoshi
+            n:
+              type: number
+              description: Output index
+            scriptPubKey:
+              type: object
+              properties:
+                asm:
+                  type: string
+                hex:
+                  type: string
+                reqSigs:
+                  type: number
+                type:
+                  type: string
+                addresses:
+                  type: array
+                  items:
+                    type: string
+            tokens:
+              type: array
+              items:
+                type: object
+                properties:
+                  tokenId:
+                    type: string
+                    description: ID of the token
+                  amount:
+                    type: number
+                    description: Number of tokens
+                  issueTxid:
+                    type: string
+                    description: TXID the token was issued in
+                  divisibility:
+                    type: number
+                    description: Decimal places the token is divisible to
+                  lockStatus:
+                    type: boolean
+                    description: Whether issuance of more tokens is locked
+                  aggregationPolicy:
+                    type: string
+                    description: Whether the tokens are aggregatable
+            used:
+              type: boolean
+              description: Whether this output has now been used
+            blockheight:
+              type: number
+              description: Blockheight of this transaction
+            usedBlockheight:
+              type: number
+              description: Blockheight this output was used in
+            usedTxid:
+              type: string
+              description: TXID this output was used in
+      blocktime:
+        type: number
+        description: Block time of this transaction
+      blockheight:
+        type: number
+        description: Block height of this transaction
+      totalsent:
+        type: number
+        description: Total NEBL sent in this transaction in satoshis
+      fee:
+        type: number
+        description: Total NEBL used as fee for this transcation in satoshis
+      blockhash:
+        type: string
+        description: Hash of the block this transaction is in
+      time:
+        type: number
+        description: Transaction time
+      confirmations:
+        type: number
+        description: Number of transaction confirmations
   getTokenMetadataResponse:
     type: object
     properties:
@@ -477,9 +665,6 @@ definitions:
                           type: string
                         value:
                           type: string
-
-
-
   getTokenHoldersResponse:
     type: object
     properties:
@@ -507,9 +692,6 @@ definitions:
       someUtxo:
         type: string
         description: A UTXO of this token
-
-
-
   issueTokenRequest:
     type: object
     required:
@@ -530,7 +712,9 @@ definitions:
         description: Number of decimal places the token should be divisble by (0-7)
       fee:
         type: number
-        description: Fee in satoshi to include in the issuance transaction min 1000000000 (10 NEBL)
+        description: >-
+          Fee in satoshi to include in the issuance transaction min 1000000000
+          (10 NEBL)
       reissuable:
         type: boolean
         description: whether the token should be reissuable
@@ -561,7 +745,7 @@ definitions:
                 description: mimeType of URL content
               dataHash:
                 type: string
-                description: Hash of data at the URL, used for verification
+                description: 'Hash of data at the URL, used for verification'
           userData:
             type: object
             description: Metadata set by user on token
@@ -611,10 +795,14 @@ definitions:
                           description: Address fee is auto sent to
                         tokenId:
                           type: string
-                          description: How fee should be paid, either with a tokenId, or with NEBL if null
+                          description: >-
+                            How fee should be paid, either with a tokenId, or
+                            with NEBL if null
                         value:
                           type: string
-                          description: Amount of NTP1 token, or NEBL (in satoshi) to pay as fee
+                          description: >-
+                            Amount of NTP1 token, or NEBL (in satoshi) to pay as
+                            fee
                   locked:
                     type: boolean
                     description: Whether this rule can be modified in future transactions
@@ -640,9 +828,6 @@ definitions:
                   locked:
                     type: boolean
                     description: Whether this rule can be modified in future transactions
-
-
-
   issueTokenResponse:
     type: object
     properties:
@@ -651,10 +836,7 @@ definitions:
         description: TokenId of the to be issued token
       txHex:
         type: string
-        description: Unsigned, raw transaction hex of the transaction to issue the token
-
-
-
+        description: 'Unsigned, raw transaction hex of the transaction to issue the token'
   sendTokenRequest:
     type: object
     required:
@@ -663,7 +845,9 @@ definitions:
     properties:
       fee:
         type: number
-        description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
+        description: >-
+          Fee in satoshi to include in the issuance transaction min 10000
+          (0.0001 NEBL)
       from:
         type: array
         description: Array of addresses to send the token from
@@ -710,7 +894,7 @@ definitions:
                 description: mimeType of URL content
               dataHash:
                 type: string
-                description: Hash of data at the URL, used for verification
+                description: 'Hash of data at the URL, used for verification'
           userData:
             type: object
             description: Metadata set by user on token
@@ -760,10 +944,14 @@ definitions:
                           description: Address fee is auto sent to
                         tokenId:
                           type: string
-                          description: How fee should be paid, either with a tokenId, or with NEBL if null
+                          description: >-
+                            How fee should be paid, either with a tokenId, or
+                            with NEBL if null
                         value:
                           type: string
-                          description: Amount of NTP1 token, or NEBL (in satoshi) to pay as fee
+                          description: >-
+                            Amount of NTP1 token, or NEBL (in satoshi) to pay as
+                            fee
                   locked:
                     type: boolean
                     description: Whether this rule can be modified in future transactions
@@ -789,15 +977,12 @@ definitions:
                   locked:
                     type: boolean
                     description: Whether this rule can be modified in future transactions
-
-
-
   sendTokenResponse:
     type: object
     properties:
       txHex:
         type: string
-        description: Unsigned, raw transaction hex of the transaction to send the token
+        description: 'Unsigned, raw transaction hex of the transaction to send the token'
       ntp1OutputIndexes:
         type: array
         description: Array of indexes transfering NTP1 tokens
@@ -808,9 +993,6 @@ definitions:
         description: Array of indexes of multisig outputs
         items:
           type: number
-
-
-
   burnTokenRequest:
     type: object
     required:
@@ -819,7 +1001,9 @@ definitions:
     properties:
       fee:
         type: number
-        description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
+        description: >-
+          Fee in satoshi to include in the issuance transaction min 10000
+          (0.0001 NEBL)
       from:
         type: array
         description: Array of addresses to send the token from
@@ -851,15 +1035,12 @@ definitions:
             tokenId:
               type: string
               description: Unique token id we are burning
-
-
-
   burnTokenResponse:
     type: object
     properties:
       txHex:
         type: string
-        description: Unsigned, raw transaction hex of the transaction to burn the token
+        description: 'Unsigned, raw transaction hex of the transaction to burn the token'
       ntp1OutputIndexes:
         type: array
         description: Array of indexes transfering NTP1 tokens
@@ -870,9 +1051,18 @@ definitions:
         description: Array of indexes of multisig outputs
         items:
           type: number
-
-
-
+  getFaucetWithdrawalResponse:
+    type: object
+    properties:
+      status:
+        type: string
+        description: Whether the withdrawal was successful
+      data:
+        type: object
+        properties:
+          txId:
+            type: string
+            description: TXID of a successful withdrawal
   Error:
     type: object
     properties:
