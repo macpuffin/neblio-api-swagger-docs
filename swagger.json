@@ -2379,23 +2379,26 @@
               "description": "Long name or description of token (ex. Nibble)"
             },
             "urls": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the URL"
-                },
-                "url": {
-                  "type": "string",
-                  "description": "Actual URL"
-                },
-                "mimeType": {
-                  "type": "string",
-                  "description": "mimeType of URL content"
-                },
-                "dataHash": {
-                  "type": "string",
-                  "description": "Hash of data at the URL, used for verification"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the URL"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Actual URL"
+                  },
+                  "mimeType": {
+                    "type": "string",
+                    "description": "mimeType of URL content"
+                  },
+                  "dataHash": {
+                    "type": "string",
+                    "description": "Hash of data at the URL, used for verification"
+                  }
                 }
               }
             },
@@ -2600,23 +2603,26 @@
               "description": "Long name or description of token (ex. Nibble)"
             },
             "urls": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the URL"
-                },
-                "url": {
-                  "type": "string",
-                  "description": "Actual URL"
-                },
-                "mimeType": {
-                  "type": "string",
-                  "description": "mimeType of URL content"
-                },
-                "dataHash": {
-                  "type": "string",
-                  "description": "Hash of data at the URL, used for verification"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the URL"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Actual URL"
+                  },
+                  "mimeType": {
+                    "type": "string",
+                    "description": "mimeType of URL content"
+                  },
+                  "dataHash": {
+                    "type": "string",
+                    "description": "Hash of data at the URL, used for verification"
+                  }
                 }
               }
             },
