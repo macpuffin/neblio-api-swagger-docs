@@ -858,7 +858,7 @@
     "/ins/status": {
       "get": {
         "summary": "Utility API for calling several blockchain node functions",
-        "description": "tility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash",
+        "description": "Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash",
         "operationId": "getStatus",
         "consumes": [
           "application/json"
@@ -1333,7 +1333,7 @@
     "/testnet/ins/status": {
       "get": {
         "summary": "Utility API for calling several blockchain node functions",
-        "description": "tility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash",
+        "description": "Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash",
         "operationId": "testnet_getStatus",
         "consumes": [
           "application/json"

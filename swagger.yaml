@@ -594,7 +594,7 @@ paths:
   '/ins/status':
     get:
       summary: Utility API for calling several blockchain node functions
-      description: tility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+      description: Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: getStatus
       consumes:
         - application/json
@@ -913,7 +913,7 @@ paths:
   '/testnet/ins/status':
     get:
       summary: Utility API for calling several blockchain node functions
-      description: tility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+      description: Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: testnet_getStatus
       consumes:
         - application/json
@@ -2208,7 +2208,7 @@ definitions:
         description: Total NEBL received in satoshis
       totalSent:
         type: number
-        description: Total NEBL sent 
+        description: Total NEBL sent
       totalSentSat:
         type: number
         description: Total NEBL sent satoshis
