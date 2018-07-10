@@ -563,7 +563,7 @@ paths:
           description: Block Hash
           required: false
           type: string
-        - name: page
+        - name: pageNum
           in: query
           description: Page number to display
           required: false
@@ -882,7 +882,7 @@ paths:
           description: Block Hash
           required: false
           type: string
-        - name: page
+        - name: pageNum
           in: query
           description: Page number to display
           required: false
