@@ -3,7 +3,7 @@
   "info": {
     "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "host": "ntp1node.nebl.io",
   "schemes": [
@@ -2329,7 +2329,8 @@
         "amount",
         "divisibility",
         "fee",
-        "reissuable"
+        "reissuable",
+        "transfer"
       ],
       "properties": {
         "issueAddress": {
@@ -2359,6 +2360,21 @@
             "splitChange": {
               "type": "boolean",
               "description": "If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)"
+            }
+          }
+        },
+        "transfer": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string",
+                "description": "Address to send the amount of issued tokens to"
+              },
+              "amount": {
+                "type": "number"
+              }
             }
           }
         },

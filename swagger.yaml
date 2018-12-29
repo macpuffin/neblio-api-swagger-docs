@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Neblio REST API Suite
   description: APIs for Interacting with NTP1 Tokens & The Neblio Blockchain
-  version: 1.2.0
+  version: 1.2.1
 host: ntp1node.nebl.io
 schemes:
   - https
@@ -502,7 +502,9 @@ paths:
   '/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an address
+      description: >-
+        Returns information on each Unspent Transaction Output contained at an
+        address
       operationId: getAddressUtxos
       consumes:
         - application/json
@@ -543,7 +545,7 @@ paths:
           description: Total sent by address
           schema:
             $ref: '#/definitions/getAddressTotalSentResponse'
-  '/ins/txs':
+  /ins/txs:
     get:
       summary: Get transactions by block or address
       description: Returns all transactions by block or address
@@ -575,7 +577,7 @@ paths:
           description: List of transactions
           schema:
             $ref: '#/definitions/getTxsResponse'
-  '/ins/sync':
+  /ins/sync:
     get:
       summary: Get node sync status
       description: Returns information on the node's sync progress
@@ -591,10 +593,12 @@ paths:
           description: Sync Info
           schema:
             $ref: '#/definitions/getSyncResponse'
-  '/ins/status':
+  /ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+      description: >-
+        Utility API for calling several blockchain node functions - getInfo,
+        getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: getStatus
       consumes:
         - application/json
@@ -603,7 +607,9 @@ paths:
       parameters:
         - name: q
           in: query
-          description: Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash
+          description: >-
+            Function to call, getInfo, getDifficulty, getBestBlockHash, or
+            getLastBlockHash
           required: false
           type: string
       tags:
@@ -821,7 +827,9 @@ paths:
   '/testnet/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an address
+      description: >-
+        Returns information on each Unspent Transaction Output contained at an
+        address
       operationId: testnet_getAddressUtxos
       consumes:
         - application/json
@@ -862,7 +870,7 @@ paths:
           description: Total sent by address
           schema:
             $ref: '#/definitions/getAddressTotalSentResponse'
-  '/testnet/ins/txs':
+  /testnet/ins/txs:
     get:
       summary: Get transactions by block or address
       description: Returns all transactions by block or address
@@ -894,7 +902,7 @@ paths:
           description: List of transactions
           schema:
             $ref: '#/definitions/getTxsResponse'
-  '/testnet/ins/sync':
+  /testnet/ins/sync:
     get:
       summary: Get node sync status
       description: Returns information on the node's sync progress
@@ -910,10 +918,12 @@ paths:
           description: Sync Info
           schema:
             $ref: '#/definitions/getSyncResponse'
-  '/testnet/ins/status':
+  /testnet/ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+      description: >-
+        Utility API for calling several blockchain node functions - getInfo,
+        getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: testnet_getStatus
       consumes:
         - application/json
@@ -922,7 +932,9 @@ paths:
       parameters:
         - name: q
           in: query
-          description: Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash
+          description: >-
+            Function to call, getInfo, getDifficulty, getBestBlockHash, or
+            getLastBlockHash
           required: false
           type: string
       tags:
@@ -1621,6 +1633,7 @@ definitions:
       - divisibility
       - fee
       - reissuable
+      - transfer
     properties:
       issueAddress:
         type: string
@@ -1645,7 +1658,19 @@ definitions:
         properties:
           splitChange:
             type: boolean
-            description: If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)
+            description: >-
+              If true change will be split into 2 outputs, one for NEBL change
+              and one for NTP1 change (recommended)
+      transfer:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Address to send the amount of issued tokens to
+            amount:
+              type: number
       metadata:
         type: object
         description: Object representing all metadata at token issuance
@@ -1803,12 +1828,14 @@ definitions:
               type: string
               description: ID of token we are sending
       flags:
-          type: object
-          description: Object representing flags that potentialy modify this transaction
-          properties:
-            splitChange:
-              type: boolean
-              description: If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)
+        type: object
+        description: Object representing flags that potentialy modify this transaction
+        properties:
+          splitChange:
+            type: boolean
+            description: >-
+              If true change will be split into 2 outputs, one for NEBL change
+              and one for NTP1 change (recommended)
       metadata:
         type: object
         description: Object representing all metadata at token issuance
@@ -2304,7 +2331,9 @@ definitions:
         description: Node type
   getStatusResponse:
     type: object
-    description: Depending on the function called, the structure and information contained in this object will vary
+    description: >-
+      Depending on the function called, the structure and information contained
+      in this object will vary
   Error:
     type: object
     properties:
