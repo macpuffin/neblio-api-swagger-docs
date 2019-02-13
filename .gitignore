@@ -1,2 +1,5 @@
 
 .DS_Store
+travis-ci/deploy_keys.tar
+travis-ci/*.pub
+travis-ci/*-repo
