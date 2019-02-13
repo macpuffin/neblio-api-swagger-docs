@@ -14,9 +14,9 @@ git clone git@github.com:NeblioTeam/neblio-api-lib-python.git
 cd neblio-api-lib-python
 
 echo "Copying files..."
-rm -rf docs neblio-api
+rm -rf docs neblioapi
 cp -r ../swagger-out/python/docs .
-cp -r ../swagger-out/python/neblio-api .
+cp -r ../swagger-out/python/neblioapi .
 cp -r ../swagger-out/python/test .
 cp ../swagger-out/python/requirements.txt .
 cp ../swagger-out/python/test-requirements.txt .
