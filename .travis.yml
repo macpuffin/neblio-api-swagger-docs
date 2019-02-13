@@ -6,7 +6,7 @@ cache:
   - "$HOME/.m2"
 install:
 - ". ./travis-ci/install-openapi-generator.sh"
-- openssl aes-256-cbc -K $encrypted_fad47a4f32eb_key -iv $encrypted_fad47a4f32eb_iv -in ./travis-ci/deploy_keys.tar.enc -out ./travis-ci/deploy_keys.tar -d
+- openssl aes-256-cbc -K $encrypted_a4ab3f701f30_key -iv $encrypted_a4ab3f701f30_iv -in ./travis-ci/deploy_keys.tar.enc -out ./travis-ci/deploy_keys.tar -d
 - tar xvf ./travis-ci/deploy_keys.tar -C ./travis-ci/
 script:
 - "/bin/sh ./generate-sdks"
