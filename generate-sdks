@@ -35,7 +35,7 @@ for lang in $languages
 do
     $SWAGGER_CMD generate \
         --input-spec "./swagger.json" \
-        --lang "${lang}" \
+        --generator-name "${lang}" \
         --config "./swagger-config/config-${lang}.json" \
         --template-dir "./swagger-templates/${lang}" \
         --output "./swagger-out/${lang}"
