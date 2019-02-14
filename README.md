@@ -12,6 +12,8 @@ Neblio API Specifications
 This repository contains the specifications for generating client SDKs with
 [Swagger/OpenAPI](http://swagger.io/).
 
+You can use the [Swagger UI](https://learn.nebl.io/apidocs/) to interact with the APIs directly.
+
 The canonical specification is defined in `swagger.json`. The templates for our
 supported SDKs are located in `swagger-templates`. The configuration for each
 SDK (e.g. name of the library, version number, etc.) are located in
