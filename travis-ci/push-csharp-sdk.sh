@@ -14,6 +14,7 @@ git clone git@github.com:NeblioTeam/neblio-api-lib-csharp.git
 cd neblio-api-lib-csharp
 
 echo "Copying files..."
+mkdir -p src
 rm -rf docs src/Neblio.API
 cp -r ../swagger-out/csharp/docs .
 cp -r ../swagger-out/csharp/src/Neblio.API ./src/Neblio.API
