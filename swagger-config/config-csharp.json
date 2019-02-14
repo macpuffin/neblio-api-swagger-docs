@@ -1,0 +1,8 @@
+{
+  "packageName": "Neblio.API",
+  "packageVersion": "1.2.1",
+  "optionalProjectFile": "true",
+  "httpUserAgent": "Neblio-API-CSharp/1.2.1",
+  "gitUserId": "NeblioTeam",
+  "gitRepoId": "neblio-api-lib-csharp"
+}
