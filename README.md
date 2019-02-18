@@ -4,6 +4,8 @@ APIs for Interacting with NTP1 Tokens & The Neblio Blockchain [![Build Status](h
 This is the project that _generates_ API clients for connecting to the public Neblio API. You probably want to just use one of the clients that are pre-built in a language of your choice:
 
 * [Python](https://github.com/NeblioTeam/neblio-api-lib-python)
+* [JavaScript](https://github.com/NeblioTeam/neblio-api-lib-js)
+* [C#](https://github.com/NeblioTeam/neblio-api-lib-csharp)
 
 
 Neblio API Specifications
