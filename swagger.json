@@ -14,13 +14,8 @@
     "/": {
       "post": {
         "summary": "Send a JSON-RPC call to a localhost neblio-Qt or nebliod node",
-        "description": "X",
+        "description": "Call any Neblio RPC command from the Neblio API libraries. Useful for signing transactions with a local node. Will not work from this page due to CORS restrictions. Use port 16326 for testnet.",
         "operationId": "RPC",
-        "security": [
-          {
-            "rpcAuth": []
-          }
-        ],
         "servers": [
           {
             "url": "http://127.0.0.1:{port}",
@@ -37,7 +32,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/rpcRequest"
               }
             }
           }
@@ -47,11 +42,11 @@
         ],
         "responses": {
           "200": {
-            "description": "d",
+            "description": "Object containing the JSON response from the Neblio node.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/rpcResponse"
                 }
               }
             }
@@ -1849,12 +1844,6 @@
     }
   },
   "components": {
-    "securitySchemes": {
-      "rpcAuth": {
-        "type": "http",
-        "scheme": "basic"
-      }
-    },
     "requestBodies": {
       "sendTokenRequest": {
         "content": {
@@ -3401,6 +3390,61 @@
       "getStatusResponse": {
         "type": "object",
         "description": "Depending on the function called, the structure and information contained in this object will vary"
+      },
+      "rpcRequest": {
+        "type": "object",
+        "required": [
+          "jsonrpc",
+          "id",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "jsonrpc": {
+            "type": "string",
+            "default": "1.0",
+            "example": "1.0",
+            "description": "JSON-RPC version"
+          },
+          "id": {
+            "type": "string",
+            "default": "neblio-apis",
+            "example": "neblio-apis",
+            "description": "Identifier of RCP caller"
+          },
+          "method": {
+            "type": "string",
+            "example": "getstakinginfo",
+            "description": "Name of the Neblio RPC method to call"
+          },
+          "params": {
+            "type": "array",
+            "default": [],
+            "example": [],
+            "description": "Array of string params that should be passed to the RPC method.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "rpcResponse": {
+        "type": "object",
+        "description": "Object containing the JSON response from the Neblio node.",
+        "properties": {
+          "result": {
+            "type": "object",
+            "description": "Object containing the response output."
+          },
+          "id": {
+            "type": "string",
+            "description": "Identifier of RCP caller"
+          },
+          "error": {
+            "type": "object",
+            "description": "Object containing any error information."
+          }
+        }
       },
       "Error": {
         "type": "object",
