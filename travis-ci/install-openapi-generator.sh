@@ -2,10 +2,10 @@
 
 SWAGGER_DIR=./openapi-generator
 SWAGGER_PATCHES_DIR=`pwd`/travis-ci/swagger-codegen-patches
-SWAGGER_CODEGEN_SHA=24df02a191220d4093655dd58bee55fd8e05eec1
 
 # download from swagger-codegen from github
-git clone https://github.com/openapitools/openapi-generator.git $SWAGGER_DIR
+#git clone https://github.com/openapitools/openapi-generator.git $SWAGGER_DIR
+git clone -b python_host_index_fix https://github.com/NeblioTeam/openapi-generator.git $SWAGGER_DIR
 cd $SWAGGER_DIR
 if [ -n "${SWAGGER_CODEGEN_SHA+1}" ]
 then
