@@ -5,6 +5,7 @@ This is the project that _generates_ API clients for connecting to the public Ne
 
 * [Python](https://github.com/NeblioTeam/neblio-api-lib-python)
 * [JavaScript](https://github.com/NeblioTeam/neblio-api-lib-js)
+* [Java](https://github.com/NeblioTeam/neblio-api-lib-java)
 * [C#](https://github.com/NeblioTeam/neblio-api-lib-csharp)
 
 

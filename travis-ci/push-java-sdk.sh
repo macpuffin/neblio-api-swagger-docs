@@ -14,9 +14,9 @@ git clone git@github.com:NeblioTeam/neblio-api-lib-java.git
 cd neblio-api-lib-java
 
 echo "Copying files..."
-rm -rf docs src/main
+rm -rf docs src
 cp -r ../swagger-out/java/docs .
-cp -r ../swagger-out/java/src/main ./src/
+cp -r ../swagger-out/java/src/main ./src/main/
 rm -f ./src/main/AndroidManifest.xml
 cp ../swagger-out/java/build.gradle .
 cp ../swagger-out/java/build.sbt .
