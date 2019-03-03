@@ -1,0 +1,13 @@
+{
+  "modelPackage": "io.nebl.neblioapi.models",
+  "apiPackage": "io.nebl.neblioapi.api",
+  "invokerPackage": "io.nebl.neblioapi",
+  "groupId": "io.nebl",
+  "artifactId": "neblioapi",
+  "artifactVersion": "1.2.1",
+  "artifactUrl": "https://github.com/NeblioTeam/neblio-api-lib-java",
+  "artifactDescription": "Java client library for the Neblio APIs",
+  "httpUserAgent": "neblio-api-java/1.2.1",
+  "gitUserId": "NeblioTeam",
+  "gitRepoId": "neblio-api-lib-java"
+}
