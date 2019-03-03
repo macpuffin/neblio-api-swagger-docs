@@ -15,6 +15,8 @@ cd neblio-api-lib-java
 
 echo "Copying files..."
 rm -rf docs src
+mkdir -p ./src
+mkdir -p ./src/main
 cp -r ../swagger-out/java/docs .
 cp -r ../swagger-out/java/src/main ./src/main/
 rm -f ./src/main/AndroidManifest.xml
