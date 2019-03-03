@@ -2,6 +2,7 @@
 
 SWAGGER_DIR=./openapi-generator
 SWAGGER_PATCHES_DIR=`pwd`/travis-ci/swagger-codegen-patches
+SWAGGER_CODEGEN_SHA=24df02a191220d4093655dd58bee55fd8e05eec1
 
 # download from swagger-codegen from github
 git clone https://github.com/openapitools/openapi-generator.git $SWAGGER_DIR
