@@ -25,6 +25,8 @@ cp ../swagger-out/java/gradle.properties .
 cp ../swagger-out/java/pom.xml .
 cp ../swagger-out/java/settings.gradle .
 cp ../swagger-out/java/README.md .
+cp ../swagger-out/java/.travis.yml .
+cp ../swagger-out/java/.gitignore .
 
 git add --all .
 git commit -m "From neblio-api-specification: ${TRAVIS_COMMIT_MESSAGE}"
