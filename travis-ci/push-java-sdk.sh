@@ -17,6 +17,7 @@ echo "Copying files..."
 rm -rf docs src
 mkdir -p ./src
 cp -r ../swagger-out/java/docs .
+cp -r ../swagger-out/java/gradle .
 cp -r ../swagger-out/java/src/main ./src/main
 rm -f ./src/main/AndroidManifest.xml
 cp ../swagger-out/java/build.gradle .
