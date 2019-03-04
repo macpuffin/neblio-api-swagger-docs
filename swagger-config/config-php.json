@@ -1,0 +1,13 @@
+{
+  "packagePath": "NeblioAPI",
+  "packageName": "NeblioAPI",
+  "artifactVersion": "1.2.1",
+  "invokerPackage": "NeblioAPI",
+  "modelPackage": "Model",
+  "apiPackage": "Api",
+  "composerVendorName": "NeblioTeam",
+  "composerProjectName": "neblio-api-lib-php",
+  "httpUserAgent": "neblio-api-php/1.2.1",
+  "gitUserId": "NeblioTeam",
+  "gitRepoId": "neblio-api-lib-php"
+}

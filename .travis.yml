@@ -22,4 +22,5 @@ after_success:
 - "/bin/sh ./travis-ci/push-java-sdk.sh"
 - "/bin/sh ./travis-ci/push-go-sdk.sh"
 - "/bin/sh ./travis-ci/push-objc-sdk.sh"
+- "/bin/sh ./travis-ci/push-php-sdk.sh"
 
