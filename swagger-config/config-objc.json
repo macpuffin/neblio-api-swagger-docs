@@ -1,6 +1,7 @@
 {
   "podName": "NeblioAPI",
   "podVersion": "1.2.1",
+  "classPrefix": "NEBL",
   "httpUserAgent": "neblio-api-objective-c/1.2.1",
   "gitUserId": "NeblioTeam",
   "gitRepoId": "neblio-api-lib-objective-c",
