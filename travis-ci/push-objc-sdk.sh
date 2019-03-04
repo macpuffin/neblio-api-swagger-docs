@@ -16,7 +16,7 @@ cd neblio-api-lib-objective-c
 echo "Copying files..."
 rm -rf docs NeblioAPI
 cp -r ../swagger-out/objc/docs .
-cp -r ../swagger-out/objec/NeblioAPI .
+cp -r ../swagger-out/objc/NeblioAPI .
 cp ../swagger-out/objc/NeblioAPI.podspec .
 cp ../swagger-out/objc/README.md .
 #cp ../swagger-out/objc/.travis.yml .
