@@ -23,4 +23,5 @@ after_success:
 - "/bin/sh ./travis-ci/push-go-sdk.sh"
 - "/bin/sh ./travis-ci/push-objc-sdk.sh"
 - "/bin/sh ./travis-ci/push-php-sdk.sh"
+- "/bin/sh ./travis-ci/push-ruby-sdk.sh"
 
