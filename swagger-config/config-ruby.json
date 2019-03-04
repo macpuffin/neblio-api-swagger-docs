@@ -1,0 +1,11 @@
+{
+  "gemName": "neblio_api",
+  "moduleName": "NeblioAPI",
+  "httpUserAgent": "neblio-api-ruby/1.2.1",
+  "gemVersion": "1.2.1",
+  "gemAuthor": "NeblioTeam",
+  "gemHomepage": "https://github.com/NeblioTeam/neblio-api-lib-ruby",
+  "gemDescription": "Ruby client library for the Neblio APIs",
+  "gitUserId": "NeblioTeam",
+  "gitRepoId": "neblio-api-lib-ruby"
+}

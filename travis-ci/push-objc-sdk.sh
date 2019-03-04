@@ -19,7 +19,6 @@ cp -r ../swagger-out/objc/docs .
 cp -r ../swagger-out/objc/NeblioAPI .
 cp ../swagger-out/objc/NeblioAPI.podspec .
 cp ../swagger-out/objc/README.md .
-#cp ../swagger-out/objc/.travis.yml .
 cp ../swagger-out/objc/.gitignore .
 
 
