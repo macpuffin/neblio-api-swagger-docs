@@ -1,0 +1,7 @@
+{
+  "packageName": "neblioapi",
+  "packageVersion": "1.2.1",
+  "httpUserAgent": "neblio-api-go/1.2.1",
+  "gitUserId": "NeblioTeam",
+  "gitRepoId": "neblio-api-lib-go"
+}
