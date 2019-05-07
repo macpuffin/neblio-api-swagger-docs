@@ -1477,6 +1477,9 @@ components:
         tokenId:
           type: string
           description: ID of the token
+        someUtxo:
+          type: string
+          description: Example UTXO containing this token.
         divisibility:
           type: number
           description: Decimal places the token is divisible to
