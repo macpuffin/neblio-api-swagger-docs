@@ -3,7 +3,7 @@
   "info": {
     "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.2.1"
+    "version": "1.2.2"
   },
   "servers": [
     {
@@ -167,9 +167,9 @@
     },
     "/ntp1/tokenmetadata/{tokenid}": {
       "get": {
-        "summary": "Get Issuance Metadata of Token",
-        "description": "Returns the metadata associated with a token at time of issuance.\n",
-        "operationId": "getTokenMetadataOfIssuance",
+        "summary": "Get Metadata of Token",
+        "description": "Returns the metadata associated with a token.\n",
+        "operationId": "getTokenMetadata",
         "parameters": [
           {
             "name": "tokenid",
@@ -186,7 +186,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An object containing the metadata of a token at issuance",
+            "description": "An object containing the metadata of a token",
             "content": {
               "application/json": {
                 "schema": {
@@ -1506,9 +1506,9 @@
     },
     "/testnet/ntp1/tokenmetadata/{tokenid}": {
       "get": {
-        "summary": "Get Issuance Metadata of Token",
-        "description": "Returns the metadata associated with a token at time of issuance.\n",
-        "operationId": "testnet_getTokenMetadataOfIssuance",
+        "summary": "Get Metadata of Token",
+        "description": "Returns the metadata associated with a token.\n",
+        "operationId": "testnet_getTokenMetadata",
         "parameters": [
           {
             "name": "tokenid",
@@ -1525,7 +1525,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An object containing the metadata of a token at issuance",
+            "description": "An object containing the metadata of a token",
             "content": {
               "application/json": {
                 "schema": {
@@ -2283,7 +2283,7 @@
             "type": "number",
             "description": "Total number of transactions of this token"
           },
-          "numofIssuance": {
+          "numOfIssuance": {
             "type": "number",
             "description": "Total number of times this token has been issued"
           },
@@ -2303,7 +2303,7 @@
             "type": "string",
             "description": "Address that issued the tokens"
           },
-          "metadataOfIssuance": {
+          "metadataOfIssuence": {
             "type": "object",
             "description": "Metadata set at issuance",
             "properties": {

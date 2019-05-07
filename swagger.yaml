@@ -2,16 +2,15 @@ openapi: 3.0.0
 info:
   title: Neblio REST API Suite
   description: APIs for Interacting with NTP1 Tokens & The Neblio Blockchain
-  version: 1.2.1
+  version: 1.2.2
 servers:
-  - url: https://ntp1node.nebl.io/
+  - url: 'https://ntp1node.nebl.io/'
 paths:
-  "/ntp1/tokenid/{tokensymbol}":
+  '/ntp1/tokenid/{tokensymbol}':
     get:
       summary: Returns the tokenId representing a token
-      description: >
-        Translates a token symbol to a tokenId if a token exists with that
-        symbol on the network
+      description: |
+        Translates a token symbol to a tokenId if a token exists with that symbol on the network
       operationId: getTokenId
       parameters:
         - name: tokensymbol
@@ -23,38 +22,36 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
-          description: Object containing the token symbol and ID, if token symbol does not
-            exist on network, empty object is returned.
+        '200':
+          description: 'Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.'
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenIdResponse"
+                $ref: '#/components/schemas/getTokenIdResponse'
   /ntp1/broadcast:
     post:
       summary: Broadcasts a signed raw transaction to the network
-      description: >
-        Broadcasts a signed raw transaction to the network. If successful
-        returns the txid of the broadcast trasnaction.
+      description: |
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
       operationId: broadcastTx
       requestBody:
-        $ref: "#/components/requestBodies/broadcastTxRequest"
+        $ref: '#/components/requestBodies/broadcastTxRequest'
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object containing the TXID if the broadcast was successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/broadcastTxResponse"
+                $ref: '#/components/schemas/broadcastTxResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ntp1/addressinfo/{address}":
+                $ref: '#/components/schemas/Error'
+  '/ntp1/addressinfo/{address}':
     get:
       summary: Information On a Neblio Address
       description: |
@@ -70,19 +67,19 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object with an array of UTXOs for this address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressInfoResponse"
+                $ref: '#/components/schemas/getAddressInfoResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ntp1/transactioninfo/{txid}":
+                $ref: '#/components/schemas/Error'
+  '/ntp1/transactioninfo/{txid}':
     get:
       summary: Information On an NTP1 Transaction
       description: |
@@ -98,24 +95,24 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object represending this transaction
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTransactionInfoResponse"
+                $ref: '#/components/schemas/getTransactionInfoResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ntp1/tokenmetadata/{tokenid}":
+                $ref: '#/components/schemas/Error'
+  '/ntp1/tokenmetadata/{tokenid}':
     get:
-      summary: Get Issuance Metadata of Token
+      summary: Get Metadata of Token
       description: |
-        Returns the metadata associated with a token at time of issuance.
-      operationId: getTokenMetadataOfIssuance
+        Returns the metadata associated with a token.
+      operationId: getTokenMetadata
       parameters:
         - name: tokenid
           in: path
@@ -126,24 +123,23 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
-          description: An object containing the metadata of a token at issuance
+        '200':
+          description: An object containing the metadata of a token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenMetadataResponse"
+                $ref: '#/components/schemas/getTokenMetadataResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ntp1/tokenmetadata/{tokenid}/{utxo}":
+                $ref: '#/components/schemas/Error'
+  '/ntp1/tokenmetadata/{tokenid}/{utxo}':
     get:
       summary: Get UTXO Metadata of Token
-      description: >
-        Returns the metadata associated with a token for that specific utxo
-        instead of the issuance transaction.
+      description: |
+        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
       operationId: getTokenMetadataOfUtxo
       parameters:
         - name: tokenid
@@ -161,24 +157,23 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object containing the metadata of a token for a UTXO
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenMetadataResponse"
+                $ref: '#/components/schemas/getTokenMetadataResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ntp1/stakeholders/{tokenid}":
+                $ref: '#/components/schemas/Error'
+  '/ntp1/stakeholders/{tokenid}':
     get:
       summary: Get Addresses Holding a Token
-      description: >
-        Returns the the the addresses holding a token and how many tokens are
-        held
+      description: |
+        Returns the the the addresses holding a token and how many tokens are held
       operationId: getTokenHolders
       parameters:
         - name: tokenid
@@ -190,115 +185,111 @@ paths:
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object containing all of the addresses holding a token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenHoldersResponse"
+                $ref: '#/components/schemas/getTokenHoldersResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /ntp1/issue:
     post:
       summary: Builds a transaction that issues a new NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that issues a new NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
       operationId: issueToken
       requestBody:
-        $ref: "#/components/requestBodies/issueTokenRequest"
+        $ref: '#/components/requestBodies/issueTokenRequest'
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the token created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/issueTokenResponse"
+                $ref: '#/components/schemas/issueTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /ntp1/sendtoken:
     post:
       summary: Builds a transaction that sends an NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that sends an NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
       operationId: sendToken
       requestBody:
-        $ref: "#/components/requestBodies/sendTokenRequest"
+        $ref: '#/components/requestBodies/sendTokenRequest'
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the tx to send the token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/sendTokenResponse"
+                $ref: '#/components/schemas/sendTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /ntp1/burntoken:
     post:
       summary: Builds a transaction that burns an NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that burns an NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
       operationId: burnToken
       requestBody:
-        $ref: "#/components/requestBodies/burnTokenRequest"
+        $ref: '#/components/requestBodies/burnTokenRequest'
       tags:
         - NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the tx to burn the token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/burnTokenResponse"
+                $ref: '#/components/schemas/burnTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /ins/tx/send:
     post:
       summary: Broadcasts a signed raw transaction to the network (not NTP1 specific)
-      description: >
-        Broadcasts a signed raw transaction to the network. If successful
-        returns the txid of the broadcast trasnaction.
+      description: |
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
       operationId: sendTx
       requestBody:
-        $ref: "#/components/requestBodies/sendTxRequest"
+        $ref: '#/components/requestBodies/sendTxRequest'
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: An object containing the TXID if the broadcast was successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/broadcastTxResponse"
+                $ref: '#/components/schemas/broadcastTxResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/ins/block/{blockhash}":
+                $ref: '#/components/schemas/Error'
+  '/ins/block/{blockhash}':
     get:
       summary: Returns information regarding a Neblio block
       description: Returns blockchain data for a given block based upon the block hash
@@ -313,13 +304,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Object containing all information on a blockchain block
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBlockResponse"
-  "/ins/block-index/{blockindex}":
+                $ref: '#/components/schemas/getBlockResponse'
+  '/ins/block-index/{blockindex}':
     get:
       summary: Returns block hash of block
       description: Returns the block hash of a block at a given block index
@@ -334,13 +325,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Object containing block hash
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBlockIndexResponse"
-  "/ins/tx/{txid}":
+                $ref: '#/components/schemas/getBlockIndexResponse'
+  '/ins/tx/{txid}':
     get:
       summary: Returns transaction object
       description: Returns NEBL transaction object representing a NEBL transaction
@@ -355,13 +346,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Object containing transaction info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTxResponse"
-  "/ins/rawtx/{txid}":
+                $ref: '#/components/schemas/getTxResponse'
+  '/ins/rawtx/{txid}':
     get:
       summary: Returns raw transaction hex
       description: Returns raw transaction hex representing a NEBL transaction
@@ -376,13 +367,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Object containing raw hex of transaction
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getRawTxResponse"
-  "/ins/addr/{address}":
+                $ref: '#/components/schemas/getRawTxResponse'
+  '/ins/addr/{address}':
     get:
       summary: Returns address object
       description: Returns NEBL address object containing information on a specific address
@@ -397,13 +388,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Object containing address info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressResponse"
-  "/ins/addr/{address}/balance":
+                $ref: '#/components/schemas/getAddressResponse'
+  '/ins/addr/{address}/balance':
     get:
       summary: Returns address balance in sats
       description: Returns NEBL address balance in satoshis
@@ -418,13 +409,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Address balance
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressBalanceResponse"
-  "/ins/addr/{address}/unconfirmedBalance":
+                $ref: '#/components/schemas/getAddressBalanceResponse'
+  '/ins/addr/{address}/unconfirmedBalance':
     get:
       summary: Returns address unconfirmed balance in sats
       description: Returns NEBL address unconfirmed balance in satoshis
@@ -439,13 +430,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Address unconfirmed balance
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressUnconfirmedBalanceResponse"
-  "/ins/addr/{address}/totalReceived":
+                $ref: '#/components/schemas/getAddressUnconfirmedBalanceResponse'
+  '/ins/addr/{address}/totalReceived':
     get:
       summary: Returns total received by address in sats
       description: Returns total NEBL received by address in satoshis
@@ -460,17 +451,16 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Total received by address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressTotalReceivedResponse"
-  "/ins/addr/{address}/utxo":
+                $ref: '#/components/schemas/getAddressTotalReceivedResponse'
+  '/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an
-        address
+      description: Returns information on each Unspent Transaction Output contained at an address
       operationId: getAddressUtxos
       parameters:
         - name: address
@@ -482,13 +472,13 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: UTXOs at an address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressUtxosResponse"
-  "/ins/addr/{address}/totalSent":
+                $ref: '#/components/schemas/getAddressUtxosResponse'
+  '/ins/addr/{address}/totalSent':
     get:
       summary: Returns total sent by address in sats
       description: Returns total NEBL sent by address in satoshis
@@ -503,12 +493,12 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Total sent by address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressTotalSentResponse"
+                $ref: '#/components/schemas/getAddressTotalSentResponse'
   /ins/txs:
     get:
       summary: Get transactions by block or address
@@ -536,12 +526,12 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: List of transactions
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTxsResponse"
+                $ref: '#/components/schemas/getTxsResponse'
   /ins/sync:
     get:
       summary: Get node sync status
@@ -550,60 +540,57 @@ paths:
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Sync Info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getSyncResponse"
+                $ref: '#/components/schemas/getSyncResponse'
   /ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: Utility API for calling several blockchain node functions - getInfo,
-        getDifficulty, getBestBlockHash, getLastBlockHash
+      description: 'Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash'
       operationId: getStatus
       parameters:
         - name: q
           in: query
-          description: Function to call, getInfo, getDifficulty, getBestBlockHash, or
-            getLastBlockHash
+          description: 'Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash'
           required: false
           schema:
             type: string
       tags:
         - Insight
       responses:
-        "200":
+        '200':
           description: Function Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getStatusResponse"
+                $ref: '#/components/schemas/getStatusResponse'
   /testnet/ins/tx/send:
     post:
       summary: Broadcasts a signed raw transaction to the network (not NTP1 specific)
-      description: >
-        Broadcasts a signed raw transaction to the network. If successful
-        returns the txid of the broadcast trasnaction.
+      description: |
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
       operationId: testnet_sendTx
       requestBody:
-        $ref: "#/components/requestBodies/sendTxRequest"
+        $ref: '#/components/requestBodies/sendTxRequest'
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: An object containing the TXID if the broadcast was successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/broadcastTxResponse"
+                $ref: '#/components/schemas/broadcastTxResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ins/block/{blockhash}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ins/block/{blockhash}':
     get:
       summary: Returns information regarding a Neblio block
       description: Returns blockchain data for a given block based upon the block hash
@@ -618,13 +605,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Object containing all information on a blockchain block
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBlockResponse"
-  "/testnet/ins/block-index/{blockindex}":
+                $ref: '#/components/schemas/getBlockResponse'
+  '/testnet/ins/block-index/{blockindex}':
     get:
       summary: Returns block hash of block
       description: Returns the block hash of a block at a given block index
@@ -639,13 +626,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Object containing block hash
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getBlockIndexResponse"
-  "/testnet/ins/tx/{txid}":
+                $ref: '#/components/schemas/getBlockIndexResponse'
+  '/testnet/ins/tx/{txid}':
     get:
       summary: Returns transaction object
       description: Returns NEBL transaction object representing a NEBL transaction
@@ -660,13 +647,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Object containing transaction info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTxResponse"
-  "/testnet/ins/rawtx/{txid}":
+                $ref: '#/components/schemas/getTxResponse'
+  '/testnet/ins/rawtx/{txid}':
     get:
       summary: Returns raw transaction hex
       description: Returns raw transaction hex representing a NEBL transaction
@@ -681,13 +668,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Object containing raw hex of transaction
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getRawTxResponse"
-  "/testnet/ins/addr/{address}":
+                $ref: '#/components/schemas/getRawTxResponse'
+  '/testnet/ins/addr/{address}':
     get:
       summary: Returns address object
       description: Returns NEBL address object containing information on a specific address
@@ -702,13 +689,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Object containing address info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressResponse"
-  "/testnet/ins/addr/{address}/balance":
+                $ref: '#/components/schemas/getAddressResponse'
+  '/testnet/ins/addr/{address}/balance':
     get:
       summary: Returns address balance in sats
       description: Returns NEBL address balance in satoshis
@@ -723,13 +710,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Address balance
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressBalanceResponse"
-  "/testnet/ins/addr/{address}/unconfirmedBalance":
+                $ref: '#/components/schemas/getAddressBalanceResponse'
+  '/testnet/ins/addr/{address}/unconfirmedBalance':
     get:
       summary: Returns address unconfirmed balance in sats
       description: Returns NEBL address unconfirmed balance in satoshis
@@ -744,13 +731,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Address unconfirmed balance
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressUnconfirmedBalanceResponse"
-  "/testnet/ins/addr/{address}/totalReceived":
+                $ref: '#/components/schemas/getAddressUnconfirmedBalanceResponse'
+  '/testnet/ins/addr/{address}/totalReceived':
     get:
       summary: Returns total received by address in sats
       description: Returns total NEBL received by address in satoshis
@@ -765,17 +752,16 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Total received by address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressTotalReceivedResponse"
-  "/testnet/ins/addr/{address}/utxo":
+                $ref: '#/components/schemas/getAddressTotalReceivedResponse'
+  '/testnet/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an
-        address
+      description: Returns information on each Unspent Transaction Output contained at an address
       operationId: testnet_getAddressUtxos
       parameters:
         - name: address
@@ -787,13 +773,13 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: UTXOs at an address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressUtxosResponse"
-  "/testnet/ins/addr/{address}/totalSent":
+                $ref: '#/components/schemas/getAddressUtxosResponse'
+  '/testnet/ins/addr/{address}/totalSent':
     get:
       summary: Returns total sent by address in sats
       description: Returns total NEBL sent by address in satoshis
@@ -808,12 +794,12 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Total sent by address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressTotalSentResponse"
+                $ref: '#/components/schemas/getAddressTotalSentResponse'
   /testnet/ins/txs:
     get:
       summary: Get transactions by block or address
@@ -841,12 +827,12 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: List of transactions
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTxsResponse"
+                $ref: '#/components/schemas/getTxsResponse'
   /testnet/ins/sync:
     get:
       summary: Get node sync status
@@ -855,41 +841,38 @@ paths:
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Sync Info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getSyncResponse"
+                $ref: '#/components/schemas/getSyncResponse'
   /testnet/ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: Utility API for calling several blockchain node functions - getInfo,
-        getDifficulty, getBestBlockHash, getLastBlockHash
+      description: 'Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash'
       operationId: testnet_getStatus
       parameters:
         - name: q
           in: query
-          description: Function to call, getInfo, getDifficulty, getBestBlockHash, or
-            getLastBlockHash
+          description: 'Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash'
           required: false
           schema:
             type: string
       tags:
         - Testnet-Insight
       responses:
-        "200":
+        '200':
           description: Function Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getStatusResponse"
-  "/testnet/ntp1/tokenid/{tokensymbol}":
+                $ref: '#/components/schemas/getStatusResponse'
+  '/testnet/ntp1/tokenid/{tokensymbol}':
     get:
       summary: Returns the tokenId representing a token
-      description: >
-        Translates a token symbol to a tokenId if a token exists with that
-        symbol on the network
+      description: |
+        Translates a token symbol to a tokenId if a token exists with that symbol on the network
       operationId: testnet_getTokenId
       parameters:
         - name: tokensymbol
@@ -901,38 +884,36 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
-          description: Object containing the token symbol and ID, if token symbol does not
-            exist on network, empty object is returned.
+        '200':
+          description: 'Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.'
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenIdResponse"
+                $ref: '#/components/schemas/getTokenIdResponse'
   /testnet/ntp1/broadcast:
     post:
       summary: Broadcasts a signed raw transaction to the network
-      description: >
-        Broadcasts a signed raw transaction to the network. If successful
-        returns the txid of the broadcast trasnaction.
+      description: |
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
       operationId: testnet_broadcastTx
       requestBody:
-        $ref: "#/components/requestBodies/broadcastTxRequest"
+        $ref: '#/components/requestBodies/broadcastTxRequest'
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object containing the TXID if the broadcast was successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/broadcastTxResponse"
+                $ref: '#/components/schemas/broadcastTxResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ntp1/addressinfo/{address}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ntp1/addressinfo/{address}':
     get:
       summary: Information On a Neblio Address
       description: |
@@ -948,19 +929,19 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object with an array of UTXOs for this address
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getAddressInfoResponse"
+                $ref: '#/components/schemas/getAddressInfoResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ntp1/transactioninfo/{txid}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ntp1/transactioninfo/{txid}':
     get:
       summary: Information On an NTP1 Transaction
       description: |
@@ -976,24 +957,24 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object represending this transaction
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTransactionInfoResponse"
+                $ref: '#/components/schemas/getTransactionInfoResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ntp1/tokenmetadata/{tokenid}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ntp1/tokenmetadata/{tokenid}':
     get:
-      summary: Get Issuance Metadata of Token
+      summary: Get Metadata of Token
       description: |
-        Returns the metadata associated with a token at time of issuance.
-      operationId: testnet_getTokenMetadataOfIssuance
+        Returns the metadata associated with a token.
+      operationId: testnet_getTokenMetadata
       parameters:
         - name: tokenid
           in: path
@@ -1004,24 +985,23 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
-          description: An object containing the metadata of a token at issuance
+        '200':
+          description: An object containing the metadata of a token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenMetadataResponse"
+                $ref: '#/components/schemas/getTokenMetadataResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ntp1/tokenmetadata/{tokenid}/{utxo}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ntp1/tokenmetadata/{tokenid}/{utxo}':
     get:
       summary: Get UTXO Metadata of Token
-      description: >
-        Returns the metadata associated with a token for that specific utxo
-        instead of the issuance transaction.
+      description: |
+        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
       operationId: testnet_getTokenMetadataOfUtxo
       parameters:
         - name: tokenid
@@ -1039,24 +1019,23 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object containing the metadata of a token for a UTXO
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenMetadataResponse"
+                $ref: '#/components/schemas/getTokenMetadataResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  "/testnet/ntp1/stakeholders/{tokenid}":
+                $ref: '#/components/schemas/Error'
+  '/testnet/ntp1/stakeholders/{tokenid}':
     get:
       summary: Get Addresses Holding a Token
-      description: >
-        Returns the the the addresses holding a token and how many tokens are
-        held
+      description: |
+        Returns the the the addresses holding a token and how many tokens are held
       operationId: testnet_getTokenHolders
       parameters:
         - name: tokenid
@@ -1068,97 +1047,92 @@ paths:
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object containing all of the addresses holding a token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getTokenHoldersResponse"
+                $ref: '#/components/schemas/getTokenHoldersResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /testnet/ntp1/issue:
     post:
       summary: Builds a transaction that issues a new NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that issues a new NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
       operationId: testnet_issueToken
       requestBody:
-        $ref: "#/components/requestBodies/issueTokenRequest"
+        $ref: '#/components/requestBodies/issueTokenRequest'
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the token created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/issueTokenResponse"
+                $ref: '#/components/schemas/issueTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /testnet/ntp1/sendtoken:
     post:
       summary: Builds a transaction that sends an NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that sends an NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
       operationId: testnet_sendToken
       requestBody:
-        $ref: "#/components/requestBodies/sendTokenRequest"
+        $ref: '#/components/requestBodies/sendTokenRequest'
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the tx to send the token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/sendTokenResponse"
+                $ref: '#/components/schemas/sendTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /testnet/ntp1/burntoken:
     post:
       summary: Builds a transaction that burns an NTP1 Token
-      description: >
-        Builds an unsigned raw transaction that burns an NTP1 token on the
-        Neblio blockchain.
+      description: |
+        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
       operationId: testnet_burnToken
       requestBody:
-        $ref: "#/components/requestBodies/burnTokenRequest"
+        $ref: '#/components/requestBodies/burnTokenRequest'
       tags:
         - Testnet-NTP1
       responses:
-        "200":
+        '200':
           description: An object representing the tx to burn the token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/burnTokenResponse"
+                $ref: '#/components/schemas/burnTokenResponse'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /testnet/faucet:
     get:
       summary: Withdraws testnet NEBL to the specified address
-      description: >
-        Withdraw testnet NEBL to your Neblio Testnet address. By default amount
-        is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals
-        allowed per 24 hour period.
+      description: |
+        Withdraw testnet NEBL to your Neblio Testnet address. By default amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals allowed per 24 hour period.
       operationId: testnet_getFaucet
       parameters:
         - name: address
@@ -1176,12 +1150,12 @@ paths:
       tags:
         - Testnet-Faucet
       responses:
-        "200":
+        '200':
           description: Object containing the transaction ID of the withdrawal.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/getFaucetResponse"
+                $ref: '#/components/schemas/getFaucetResponse'
   /:
     post:
       security:
@@ -1199,17 +1173,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/rpcRequest"
+              $ref: '#/components/schemas/rpcRequest'
       tags:
         - JSON-RPC
       responses:
-        "200":
+        '200':
           description: Object containing the JSON response from the Neblio node.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rpcResponse"
-        "401":
+                $ref: '#/components/schemas/rpcResponse'
+        '401':
           description: Authentication information is missing or invalid
           headers:
             WWW_Authenticate:
@@ -1225,35 +1199,35 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/sendTokenRequest"
+            $ref: '#/components/schemas/sendTokenRequest'
       description: Object representing the token to be sent
       required: true
     broadcastTxRequest:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/broadcastTxRequest"
+            $ref: '#/components/schemas/broadcastTxRequest'
       description: Object representing a transaction to broadcast
       required: true
     issueTokenRequest:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/issueTokenRequest"
+            $ref: '#/components/schemas/issueTokenRequest'
       description: Object representing the token to be created
       required: true
     burnTokenRequest:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/burnTokenRequest"
+            $ref: '#/components/schemas/burnTokenRequest'
       description: Object representing the token to be burned
       required: true
     sendTxRequest:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/sendTxRequest"
+            $ref: '#/components/schemas/sendTxRequest'
       description: Object representing a transaction to broadcast
       required: true
   schemas:
@@ -1333,8 +1307,7 @@ components:
                       description: Decimal places the token is divisible to
                     lockStatus:
                       type: boolean
-                      description: Whether the token is locked, preventing more from being
-                        issued
+                      description: 'Whether the token is locked, preventing more from being issued'
                     aggregationPolicy:
                       type: string
                       description: Whether the tokens can be aggregated together
@@ -1424,7 +1397,7 @@ components:
               value:
                 type: number
                 description: Value of the output in NEBL satoshi
-              n:
+              'n':
                 type: number
                 description: Output index
               scriptPubKey:
@@ -1522,7 +1495,7 @@ components:
         numOfTransfers:
           type: number
           description: Total number of transactions of this token
-        numofIssuance:
+        numOfIssuance:
           type: number
           description: Total number of times this token has been issued
         numOfBurns:
@@ -1537,7 +1510,7 @@ components:
         issueAddress:
           type: string
           description: Address that issued the tokens
-        metadataOfIssuance:
+        metadataOfIssuence:
           type: object
           description: Metadata set at issuance
           properties:
@@ -1643,8 +1616,7 @@ components:
           description: Number of decimal places the token should be divisble by (0-7)
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 1000000000
-            (10 NEBL)
+          description: Fee in satoshi to include in the issuance transaction min 1000000000 (10 NEBL)
         reissuable:
           type: boolean
           description: whether the token should be reissuable
@@ -1654,8 +1626,7 @@ components:
           properties:
             splitChange:
               type: boolean
-              description: If true change will be split into 2 outputs, one for NEBL change
-                and one for NTP1 change (recommended)
+              description: 'If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)'
         transfer:
           type: array
           items:
@@ -1695,7 +1666,7 @@ components:
                     description: mimeType of URL content
                   dataHash:
                     type: string
-                    description: Hash of data at the URL, used for verification
+                    description: 'Hash of data at the URL, used for verification'
             userData:
               type: object
               description: Metadata set by user on token
@@ -1745,12 +1716,10 @@ components:
                             description: Address fee is auto sent to
                           tokenId:
                             type: string
-                            description: How fee should be paid, either with a tokenId, or
-                              with NEBL if null
+                            description: 'How fee should be paid, either with a tokenId, or with NEBL if null'
                           value:
                             type: string
-                            description: Amount of NTP1 token, or NEBL (in satoshi) to pay
-                              as fee
+                            description: 'Amount of NTP1 token, or NEBL (in satoshi) to pay as fee'
                     locked:
                       type: boolean
                       description: Whether this rule can be modified in future transactions
@@ -1765,8 +1734,7 @@ components:
                         description: Address that can hold the token
                       locked:
                         type: boolean
-                        description: Whether this rule can be modified in future
-                          transactions
+                        description: Whether this rule can be modified in future transactions
                 expiration:
                   type: object
                   description: Object describing expiration rules of the token
@@ -1785,7 +1753,7 @@ components:
           description: TokenId of the to be issued token
         txHex:
           type: string
-          description: Unsigned, raw transaction hex of the transaction to issue the token
+          description: 'Unsigned, raw transaction hex of the transaction to issue the token'
     sendTokenRequest:
       type: object
       required:
@@ -1794,8 +1762,7 @@ components:
       properties:
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 10000
-            (0.0001 NEBL)
+          description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
         from:
           type: array
           description: Array of addresses to send the token from
@@ -1826,8 +1793,7 @@ components:
           properties:
             splitChange:
               type: boolean
-              description: If true change will be split into 2 outputs, one for NEBL change
-                and one for NTP1 change (recommended)
+              description: 'If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)'
         metadata:
           type: object
           description: Object representing all metadata at token issuance
@@ -1857,7 +1823,7 @@ components:
                     description: mimeType of URL content
                   dataHash:
                     type: string
-                    description: Hash of data at the URL, used for verification
+                    description: 'Hash of data at the URL, used for verification'
             userData:
               type: object
               description: Metadata set by user on token
@@ -1907,12 +1873,10 @@ components:
                             description: Address fee is auto sent to
                           tokenId:
                             type: string
-                            description: How fee should be paid, either with a tokenId, or
-                              with NEBL if null
+                            description: 'How fee should be paid, either with a tokenId, or with NEBL if null'
                           value:
                             type: string
-                            description: Amount of NTP1 token, or NEBL (in satoshi) to pay
-                              as fee
+                            description: 'Amount of NTP1 token, or NEBL (in satoshi) to pay as fee'
                     locked:
                       type: boolean
                       description: Whether this rule can be modified in future transactions
@@ -1927,8 +1891,7 @@ components:
                         description: Address that can hold the token
                       locked:
                         type: boolean
-                        description: Whether this rule can be modified in future
-                          transactions
+                        description: Whether this rule can be modified in future transactions
                 expiration:
                   type: object
                   description: Object describing expiration rules of the token
@@ -1944,7 +1907,7 @@ components:
       properties:
         txHex:
           type: string
-          description: Unsigned, raw transaction hex of the transaction to send the token
+          description: 'Unsigned, raw transaction hex of the transaction to send the token'
         ntp1OutputIndexes:
           type: array
           description: Array of indexes transfering NTP1 tokens
@@ -1963,8 +1926,7 @@ components:
       properties:
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 10000
-            (0.0001 NEBL)
+          description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
         from:
           type: array
           description: Array of addresses to send the token from
@@ -2001,7 +1963,7 @@ components:
       properties:
         txHex:
           type: string
-          description: Unsigned, raw transaction hex of the transaction to burn the token
+          description: 'Unsigned, raw transaction hex of the transaction to burn the token'
         ntp1OutputIndexes:
           type: array
           description: Array of indexes transfering NTP1 tokens
@@ -2124,7 +2086,7 @@ components:
               valueSat:
                 type: number
                 description: Value of input in NEBL satoshi
-              n:
+              'n':
                 type: number
                 description: input index
         vout:
@@ -2136,7 +2098,7 @@ components:
               value:
                 type: number
                 description: Value of the output in NEBL
-              n:
+              'n':
                 type: number
                 description: Output index
               scriptPubKey:
@@ -2296,7 +2258,7 @@ components:
           type: array
           description: Array of transaction objects
           items:
-            $ref: "#/components/schemas/getTxResponse"
+            $ref: '#/components/schemas/getTxResponse'
     getSyncResponse:
       type: object
       description: Object containing node sync status
@@ -2321,8 +2283,7 @@ components:
           description: Node type
     getStatusResponse:
       type: object
-      description: Depending on the function called, the structure and information
-        contained in this object will vary
+      description: 'Depending on the function called, the structure and information contained in this object will vary'
     rpcRequest:
       type: object
       required:
@@ -2333,17 +2294,17 @@ components:
       properties:
         jsonrpc:
           type: string
-          default: "1.0"
-          example: "1.0"
+          default: '1.0'
+          example: '1.0'
           description: JSON-RPC version
         id:
           type: string
-          default: "neblio-apis"
-          example: "neblio-apis"
+          default: neblio-apis
+          example: neblio-apis
           description: Identifier of RCP caller
         method:
           type: string
-          example: "getstakinginfo"
+          example: getstakinginfo
           description: Name of the Neblio RPC method to call
         params:
           type: array
