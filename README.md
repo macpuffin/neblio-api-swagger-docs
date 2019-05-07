@@ -7,6 +7,10 @@ This is the project that _generates_ API clients for connecting to the public Ne
 * [JavaScript](https://github.com/NeblioTeam/neblio-api-lib-js)
 * [Java](https://github.com/NeblioTeam/neblio-api-lib-java)
 * [C#](https://github.com/NeblioTeam/neblio-api-lib-csharp)
+* [Ruby](https://github.com/NeblioTeam/neblio-api-lib-ruby)
+* [PHP](https://github.com/NeblioTeam/neblio-api-lib-php)
+* [Obj-C](https://github.com/NeblioTeam/neblio-api-lib-objective-c)
+* [Go](https://github.com/NeblioTeam/neblio-api-lib-go)
 
 
 Neblio API Specifications
