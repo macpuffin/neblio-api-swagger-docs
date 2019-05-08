@@ -3,7 +3,7 @@
   "info": {
     "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.2.2"
+    "version": "1.2.3"
   },
   "servers": [
     {
@@ -2352,39 +2352,22 @@
           },
           "metadataOfUtxo": {
             "type": "object",
-            "description": "Metadata set at issuance",
+            "description": "Metadata set for UTXO",
             "properties": {
-              "data": {
+              "userData": {
                 "type": "object",
+                "description": "Metadata set by user on token for UTXO",
                 "properties": {
-                  "tokenName": {
-                    "type": "string",
-                    "description": "Token symbol"
-                  },
-                  "issuer": {
-                    "type": "string",
-                    "description": "Name of token issuer"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "Token description"
-                  },
-                  "userData": {
-                    "type": "object",
-                    "description": "Metadata set by user on token",
-                    "properties": {
-                      "meta": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "key": {
-                              "type": "string"
-                            },
-                            "value": {
-                              "type": "string"
-                            }
-                          }
+                  "meta": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
                         }
                       }
                     }
