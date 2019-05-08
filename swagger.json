@@ -3,7 +3,7 @@
   "info": {
     "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.2.3"
+    "version": "1.2.4"
   },
   "servers": [
     {
@@ -2361,15 +2361,7 @@
                   "meta": {
                     "type": "array",
                     "items": {
-                      "type": "object",
-                      "properties": {
-                        "key": {
-                          "type": "string"
-                        },
-                        "value": {
-                          "type": "string"
-                        }
-                      }
+                      "type": "object"
                     }
                   }
                 }
