@@ -3,7 +3,7 @@
   "info": {
     "title": "Neblio REST API Suite",
     "description": "APIs for Interacting with NTP1 Tokens & The Neblio Blockchain",
-    "version": "1.2.4"
+    "version": "1.3.0"
   },
   "servers": [
     {
@@ -179,6 +179,14 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses",
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "tags": [
@@ -230,6 +238,14 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses",
+            "schema": {
+              "type": "number"
             }
           }
         ],
@@ -1518,6 +1534,14 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses",
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "tags": [
@@ -1569,6 +1593,14 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "verbosity",
+            "in": "query",
+            "description": "0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses",
+            "schema": {
+              "type": "number"
             }
           }
         ],
@@ -2275,6 +2307,10 @@
             "type": "string",
             "description": "Whether the tokens are aggregatable"
           },
+          "initialIssuanceAmount": {
+            "type": "number",
+            "description": "Total tokens issued in initial issuance"
+          },
           "totalSupply": {
             "type": "number",
             "description": "Total number of tokens in supply"
@@ -2307,7 +2343,7 @@
             "type": "string",
             "description": "Address that issued the tokens"
           },
-          "metadataOfIssuence": {
+          "metadataOfIssuance": {
             "type": "object",
             "description": "Metadata set at issuance",
             "properties": {

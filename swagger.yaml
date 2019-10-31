@@ -2,15 +2,16 @@ openapi: 3.0.0
 info:
   title: Neblio REST API Suite
   description: APIs for Interacting with NTP1 Tokens & The Neblio Blockchain
-  version: 1.2.4
+  version: 1.3.0
 servers:
   - url: 'https://ntp1node.nebl.io/'
 paths:
   '/ntp1/tokenid/{tokensymbol}':
     get:
       summary: Returns the tokenId representing a token
-      description: |
-        Translates a token symbol to a tokenId if a token exists with that symbol on the network
+      description: >
+        Translates a token symbol to a tokenId if a token exists with that
+        symbol on the network
       operationId: getTokenId
       parameters:
         - name: tokensymbol
@@ -23,7 +24,9 @@ paths:
         - NTP1
       responses:
         '200':
-          description: 'Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.'
+          description: >-
+            Object containing the token symbol and ID, if token symbol does not
+            exist on network, empty object is returned.
           content:
             application/json:
               schema:
@@ -31,8 +34,9 @@ paths:
   /ntp1/broadcast:
     post:
       summary: Broadcasts a signed raw transaction to the network
-      description: |
-        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+      description: >
+        Broadcasts a signed raw transaction to the network. If successful
+        returns the txid of the broadcast trasnaction.
       operationId: broadcastTx
       requestBody:
         $ref: '#/components/requestBodies/broadcastTxRequest'
@@ -120,6 +124,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: verbosity
+          in: query
+          description: 0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses
+          schema:
+            type: number
       tags:
         - NTP1
       responses:
@@ -138,8 +147,9 @@ paths:
   '/ntp1/tokenmetadata/{tokenid}/{utxo}':
     get:
       summary: Get UTXO Metadata of Token
-      description: |
-        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
+      description: >
+        Returns the metadata associated with a token for that specific utxo
+        instead of the issuance transaction.
       operationId: getTokenMetadataOfUtxo
       parameters:
         - name: tokenid
@@ -154,6 +164,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: verbosity
+          in: query
+          description: 0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses
+          schema:
+            type: number
       tags:
         - NTP1
       responses:
@@ -172,8 +187,9 @@ paths:
   '/ntp1/stakeholders/{tokenid}':
     get:
       summary: Get Addresses Holding a Token
-      description: |
-        Returns the the the addresses holding a token and how many tokens are held
+      description: >
+        Returns the the the addresses holding a token and how many tokens are
+        held
       operationId: getTokenHolders
       parameters:
         - name: tokenid
@@ -200,8 +216,9 @@ paths:
   /ntp1/issue:
     post:
       summary: Builds a transaction that issues a new NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that issues a new NTP1 token on the
+        Neblio blockchain.
       operationId: issueToken
       requestBody:
         $ref: '#/components/requestBodies/issueTokenRequest'
@@ -223,8 +240,9 @@ paths:
   /ntp1/sendtoken:
     post:
       summary: Builds a transaction that sends an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that sends an NTP1 token on the
+        Neblio blockchain.
       operationId: sendToken
       requestBody:
         $ref: '#/components/requestBodies/sendTokenRequest'
@@ -246,8 +264,9 @@ paths:
   /ntp1/burntoken:
     post:
       summary: Builds a transaction that burns an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that burns an NTP1 token on the
+        Neblio blockchain.
       operationId: burnToken
       requestBody:
         $ref: '#/components/requestBodies/burnTokenRequest'
@@ -269,8 +288,9 @@ paths:
   /ins/tx/send:
     post:
       summary: Broadcasts a signed raw transaction to the network (not NTP1 specific)
-      description: |
-        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+      description: >
+        Broadcasts a signed raw transaction to the network. If successful
+        returns the txid of the broadcast trasnaction.
       operationId: sendTx
       requestBody:
         $ref: '#/components/requestBodies/sendTxRequest'
@@ -460,7 +480,9 @@ paths:
   '/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an address
+      description: >-
+        Returns information on each Unspent Transaction Output contained at an
+        address
       operationId: getAddressUtxos
       parameters:
         - name: address
@@ -549,12 +571,16 @@ paths:
   /ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: 'Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash'
+      description: >-
+        Utility API for calling several blockchain node functions - getInfo,
+        getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: getStatus
       parameters:
         - name: q
           in: query
-          description: 'Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash'
+          description: >-
+            Function to call, getInfo, getDifficulty, getBestBlockHash, or
+            getLastBlockHash
           required: false
           schema:
             type: string
@@ -570,8 +596,9 @@ paths:
   /testnet/ins/tx/send:
     post:
       summary: Broadcasts a signed raw transaction to the network (not NTP1 specific)
-      description: |
-        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+      description: >
+        Broadcasts a signed raw transaction to the network. If successful
+        returns the txid of the broadcast trasnaction.
       operationId: testnet_sendTx
       requestBody:
         $ref: '#/components/requestBodies/sendTxRequest'
@@ -761,7 +788,9 @@ paths:
   '/testnet/ins/addr/{address}/utxo':
     get:
       summary: Returns all UTXOs at a given address
-      description: Returns information on each Unspent Transaction Output contained at an address
+      description: >-
+        Returns information on each Unspent Transaction Output contained at an
+        address
       operationId: testnet_getAddressUtxos
       parameters:
         - name: address
@@ -850,12 +879,16 @@ paths:
   /testnet/ins/status:
     get:
       summary: Utility API for calling several blockchain node functions
-      description: 'Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash'
+      description: >-
+        Utility API for calling several blockchain node functions - getInfo,
+        getDifficulty, getBestBlockHash, getLastBlockHash
       operationId: testnet_getStatus
       parameters:
         - name: q
           in: query
-          description: 'Function to call, getInfo, getDifficulty, getBestBlockHash, or getLastBlockHash'
+          description: >-
+            Function to call, getInfo, getDifficulty, getBestBlockHash, or
+            getLastBlockHash
           required: false
           schema:
             type: string
@@ -871,8 +904,9 @@ paths:
   '/testnet/ntp1/tokenid/{tokensymbol}':
     get:
       summary: Returns the tokenId representing a token
-      description: |
-        Translates a token symbol to a tokenId if a token exists with that symbol on the network
+      description: >
+        Translates a token symbol to a tokenId if a token exists with that
+        symbol on the network
       operationId: testnet_getTokenId
       parameters:
         - name: tokensymbol
@@ -885,7 +919,9 @@ paths:
         - Testnet-NTP1
       responses:
         '200':
-          description: 'Object containing the token symbol and ID, if token symbol does not exist on network, empty object is returned.'
+          description: >-
+            Object containing the token symbol and ID, if token symbol does not
+            exist on network, empty object is returned.
           content:
             application/json:
               schema:
@@ -893,8 +929,9 @@ paths:
   /testnet/ntp1/broadcast:
     post:
       summary: Broadcasts a signed raw transaction to the network
-      description: |
-        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+      description: >
+        Broadcasts a signed raw transaction to the network. If successful
+        returns the txid of the broadcast trasnaction.
       operationId: testnet_broadcastTx
       requestBody:
         $ref: '#/components/requestBodies/broadcastTxRequest'
@@ -982,6 +1019,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: verbosity
+          in: query
+          description: 0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses
+          schema:
+            type: number
       tags:
         - Testnet-NTP1
       responses:
@@ -1000,8 +1042,9 @@ paths:
   '/testnet/ntp1/tokenmetadata/{tokenid}/{utxo}':
     get:
       summary: Get UTXO Metadata of Token
-      description: |
-        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
+      description: >
+        Returns the metadata associated with a token for that specific utxo
+        instead of the issuance transaction.
       operationId: testnet_getTokenMetadataOfUtxo
       parameters:
         - name: tokenid
@@ -1016,6 +1059,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: verbosity
+          in: query
+          description: 0 (Default) is fastest, 1 contains token stats, 2 contains token holding addresses
+          schema:
+            type: number
       tags:
         - Testnet-NTP1
       responses:
@@ -1034,8 +1082,9 @@ paths:
   '/testnet/ntp1/stakeholders/{tokenid}':
     get:
       summary: Get Addresses Holding a Token
-      description: |
-        Returns the the the addresses holding a token and how many tokens are held
+      description: >
+        Returns the the the addresses holding a token and how many tokens are
+        held
       operationId: testnet_getTokenHolders
       parameters:
         - name: tokenid
@@ -1062,8 +1111,9 @@ paths:
   /testnet/ntp1/issue:
     post:
       summary: Builds a transaction that issues a new NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that issues a new NTP1 token on the
+        Neblio blockchain.
       operationId: testnet_issueToken
       requestBody:
         $ref: '#/components/requestBodies/issueTokenRequest'
@@ -1085,8 +1135,9 @@ paths:
   /testnet/ntp1/sendtoken:
     post:
       summary: Builds a transaction that sends an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that sends an NTP1 token on the
+        Neblio blockchain.
       operationId: testnet_sendToken
       requestBody:
         $ref: '#/components/requestBodies/sendTokenRequest'
@@ -1108,8 +1159,9 @@ paths:
   /testnet/ntp1/burntoken:
     post:
       summary: Builds a transaction that burns an NTP1 Token
-      description: |
-        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
+      description: >
+        Builds an unsigned raw transaction that burns an NTP1 token on the
+        Neblio blockchain.
       operationId: testnet_burnToken
       requestBody:
         $ref: '#/components/requestBodies/burnTokenRequest'
@@ -1131,8 +1183,10 @@ paths:
   /testnet/faucet:
     get:
       summary: Withdraws testnet NEBL to the specified address
-      description: |
-        Withdraw testnet NEBL to your Neblio Testnet address. By default amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals allowed per 24 hour period.
+      description: >
+        Withdraw testnet NEBL to your Neblio Testnet address. By default amount
+        is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals
+        allowed per 24 hour period.
       operationId: testnet_getFaucet
       parameters:
         - name: address
@@ -1161,7 +1215,11 @@ paths:
       security:
         - rpcAuth: []
       summary: Send a JSON-RPC call to a localhost neblio-Qt or nebliod node
-      description: Call any Neblio RPC command from the Neblio API libraries. Useful for signing transactions with a local node and other functions. Will not work from a browser due to CORS restrictions. Requires a node to be running locally at 127.0.0.1
+      description: >-
+        Call any Neblio RPC command from the Neblio API libraries. Useful for
+        signing transactions with a local node and other functions. Will not
+        work from a browser due to CORS restrictions. Requires a node to be
+        running locally at 127.0.0.1
       operationId: json_rpc
       servers:
         - url: 'http://127.0.0.1:6326'
@@ -1307,7 +1365,9 @@ components:
                       description: Decimal places the token is divisible to
                     lockStatus:
                       type: boolean
-                      description: 'Whether the token is locked, preventing more from being issued'
+                      description: >-
+                        Whether the token is locked, preventing more from being
+                        issued
                     aggregationPolicy:
                       type: string
                       description: Whether the tokens can be aggregated together
@@ -1489,6 +1549,9 @@ components:
         aggregationPolicy:
           type: string
           description: Whether the tokens are aggregatable
+        initialIssuanceAmount:
+          type: number
+          description: Total tokens issued in initial issuance
         totalSupply:
           type: number
           description: Total number of tokens in supply
@@ -1513,7 +1576,7 @@ components:
         issueAddress:
           type: string
           description: Address that issued the tokens
-        metadataOfIssuence:
+        metadataOfIssuance:
           type: object
           description: Metadata set at issuance
           properties:
@@ -1602,7 +1665,9 @@ components:
           description: Number of decimal places the token should be divisble by (0-7)
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 1000000000 (10 NEBL)
+          description: >-
+            Fee in satoshi to include in the issuance transaction min 1000000000
+            (10 NEBL)
         reissuable:
           type: boolean
           description: whether the token should be reissuable
@@ -1612,7 +1677,9 @@ components:
           properties:
             splitChange:
               type: boolean
-              description: 'If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)'
+              description: >-
+                If true change will be split into 2 outputs, one for NEBL change
+                and one for NTP1 change (recommended)
         transfer:
           type: array
           items:
@@ -1702,16 +1769,22 @@ components:
                             description: Address fee is auto sent to
                           tokenId:
                             type: string
-                            description: 'How fee should be paid, either with a tokenId, or with NEBL if null'
+                            description: >-
+                              How fee should be paid, either with a tokenId, or
+                              with NEBL if null
                           value:
                             type: string
-                            description: 'Amount of NTP1 token, or NEBL (in satoshi) to pay as fee'
+                            description: >-
+                              Amount of NTP1 token, or NEBL (in satoshi) to pay
+                              as fee
                     locked:
                       type: boolean
                       description: Whether this rule can be modified in future transactions
                 holders:
                   type: array
-                  description: Array of objects describing what addresses can hold the token
+                  description: >-
+                    Array of objects describing what addresses can hold the
+                    token
                   items:
                     type: object
                     properties:
@@ -1720,7 +1793,9 @@ components:
                         description: Address that can hold the token
                       locked:
                         type: boolean
-                        description: Whether this rule can be modified in future transactions
+                        description: >-
+                          Whether this rule can be modified in future
+                          transactions
                 expiration:
                   type: object
                   description: Object describing expiration rules of the token
@@ -1748,7 +1823,9 @@ components:
       properties:
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
+          description: >-
+            Fee in satoshi to include in the issuance transaction min 10000
+            (0.0001 NEBL)
         from:
           type: array
           description: Array of addresses to send the token from
@@ -1779,7 +1856,9 @@ components:
           properties:
             splitChange:
               type: boolean
-              description: 'If true change will be split into 2 outputs, one for NEBL change and one for NTP1 change (recommended)'
+              description: >-
+                If true change will be split into 2 outputs, one for NEBL change
+                and one for NTP1 change (recommended)
         metadata:
           type: object
           description: Object representing all metadata at token issuance
@@ -1859,16 +1938,22 @@ components:
                             description: Address fee is auto sent to
                           tokenId:
                             type: string
-                            description: 'How fee should be paid, either with a tokenId, or with NEBL if null'
+                            description: >-
+                              How fee should be paid, either with a tokenId, or
+                              with NEBL if null
                           value:
                             type: string
-                            description: 'Amount of NTP1 token, or NEBL (in satoshi) to pay as fee'
+                            description: >-
+                              Amount of NTP1 token, or NEBL (in satoshi) to pay
+                              as fee
                     locked:
                       type: boolean
                       description: Whether this rule can be modified in future transactions
                 holders:
                   type: array
-                  description: Array of objects describing what addresses can hold the token
+                  description: >-
+                    Array of objects describing what addresses can hold the
+                    token
                   items:
                     type: object
                     properties:
@@ -1877,7 +1962,9 @@ components:
                         description: Address that can hold the token
                       locked:
                         type: boolean
-                        description: Whether this rule can be modified in future transactions
+                        description: >-
+                          Whether this rule can be modified in future
+                          transactions
                 expiration:
                   type: object
                   description: Object describing expiration rules of the token
@@ -1912,7 +1999,9 @@ components:
       properties:
         fee:
           type: number
-          description: Fee in satoshi to include in the issuance transaction min 10000 (0.0001 NEBL)
+          description: >-
+            Fee in satoshi to include in the issuance transaction min 10000
+            (0.0001 NEBL)
         from:
           type: array
           description: Array of addresses to send the token from
@@ -2269,7 +2358,9 @@ components:
           description: Node type
     getStatusResponse:
       type: object
-      description: 'Depending on the function called, the structure and information contained in this object will vary'
+      description: >-
+        Depending on the function called, the structure and information
+        contained in this object will vary
     rpcRequest:
       type: object
       required:
