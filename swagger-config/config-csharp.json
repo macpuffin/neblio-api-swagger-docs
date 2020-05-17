@@ -1,8 +1,8 @@
 {
-  "packageName": "Neblio.API",
+  "packageName": "Macpuffins.API",
   "packageVersion": "1.2.1",
   "optionalProjectFile": "true",
-  "httpUserAgent": "Neblio-API-CSharp/1.2.1",
-  "gitUserId": "NeblioTeam",
-  "gitRepoId": "neblio-api-lib-csharp"
+  "httpUserAgent": "Macpuffins-API-CSharp/1.2.1",
+  "gitUserId": "macpuffin",
+  "gitRepoId": "macpuffins-api-lib-csharp"
 }
