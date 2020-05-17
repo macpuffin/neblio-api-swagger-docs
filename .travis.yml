@@ -14,8 +14,8 @@ install:
 script:
 - "/bin/sh ./generate-sdks"
 after_success:
-- git config --global user.name "Neblio Team"
-- git config --global user.email "info@nebl.io"
+- git config --global user.name "MacPuffins"
+- git config --global user.email "dev@macpuffins.com"
 - "/bin/sh ./travis-ci/push-python-sdk.sh"
 - "/bin/sh ./travis-ci/push-javascript-sdk.sh"
 - "/bin/sh ./travis-ci/push-csharp-sdk.sh"
